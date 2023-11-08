@@ -26,3 +26,10 @@
 - **Continue to learn about websever and design main interface for websever.**
 - **Learn the protocols to transfer data from hardware to the web. Then choose one that matches this project.**
 > **_NOTE:_** Because we're about to have a mid-term test, the progress of this project may slow down a bit.
+# 2 weeks (30/10/2023 - 13/11/2023)
+# Works
+ - **Link MCU with sever.**
+   - http request must be sent after fixed time and process the respone from sever.
+       -   **Problem 1: **The execution flow of the program below the mcu must change to handle the above problem => try use timer or some thing like that.
+ - **Hardware problem**
+ -   the fingerprint only be identified in the direction in which it is enroll. => that was a big problem or not ?
