@@ -30,6 +30,6 @@
 # Works
  - **Link MCU with sever.**
    - http request must be sent after fixed time and process the respone from sever.
-       -   **Problem 1: **The execution flow of the program below the mcu must change to handle the above problem => try use timer or some thing like that.
+       - **Problem 1: **The execution flow of the program below the mcu must change to handle the above problem => try use timer or some thing like that.
  - **Hardware problem**
- -   the fingerprint only be identified in the direction in which it is enroll. => that was a big problem or not ?
+   - the fingerprint only be identified in the direction in which it is enroll. => that was a big problem or not ?
