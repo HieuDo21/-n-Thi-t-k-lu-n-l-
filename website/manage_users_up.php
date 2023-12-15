@@ -5,7 +5,7 @@
   session_start();
   require'connectDB.php';
 
-    $sql = "SELECT * FROM users WHERE del_fingerid = 0 ORDER BY id DESC";
+    $sql = "SELECT * FROM users WHERE del_fingerid = 0 ORDER BY id ASC";
     $result = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($result, $sql)) {
         echo '<p class="error">SQL Error</p>';

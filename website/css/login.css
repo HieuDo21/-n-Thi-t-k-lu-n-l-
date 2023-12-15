@@ -67,6 +67,11 @@ h1{
 }
 .form .alert {
   border-radius: 25px 0 25px;
+  background-color: #eb0000;
+  margin-bottom: 20px;
+  color: #000000;
+  height: 400%;
+  padding: 10px;
 }
 .form .alert1 {
   display: none;

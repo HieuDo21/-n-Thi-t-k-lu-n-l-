@@ -43,7 +43,7 @@ if (!isset($_SESSION['Admin-name'])) {
           //Connect to database
           require'connectDB.php';
 
-            $sql = "SELECT * FROM users WHERE NOT username='' ORDER BY id DESC";
+            $sql = "SELECT * FROM users WHERE NOT username='' ORDER BY id ASC";
             $result = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare($result, $sql)) {
                 echo '<p class="error">SQL Error</p>';

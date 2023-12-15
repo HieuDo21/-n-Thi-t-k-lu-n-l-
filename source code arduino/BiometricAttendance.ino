@@ -17,10 +17,10 @@
 #define OLED_RESET -1   //   QT-PY / XIAO
 Adafruit_SH1106G display = Adafruit_SH1106G(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-const char *ssid = "Phuong Quynh";
-const char *password = "14102000";
+const char *ssid = "Phuong Quynh 1";
+const char *password = "hoilamgi";
 String postData ; 
-String links = "http://192.168.0.100//esp32/getdata.php"; 
+String links = "http://192.168.0.101//test1/getdata.php"; 
 
 #define NUMFLAKES 10
 #define XPOS 0
@@ -65,25 +65,28 @@ void loop(){
   if(WiFi.status() != WL_CONNECTED){
     connectToWiFi();
   }
-   HTTPClient http;    //Declare object of class HTTPClient
-  //Post Data
-  postData = "Get_Fingerid=get_id"; // Add the Fingerprint ID to the Post array in order to send it
-  // Post methode
-
-  http.begin(links);  //initiate HTTP request, put your Website URL or Your Computer IP 
-  http.addHeader("Content-Type", "application/x-www-form-urlencoded");    //Specify content-type header
-  
-  int httpCode = http.POST(postData);   //Send the request
-  String payload = http.getString();    //Get the response payload
-  Serial.println(httpCode);
-  if (payload.substring(0, 6) == "add-id") {
-    String add_id = payload.substring(6);
-    Serial.println(add_id);
-    id = add_id.toInt();
-    //getFingerprintEnroll();
-    digitalWrite(19, HIGH);
-  }
-  http.end();  //Close connection
+  digitalWrite(19,LOW);
+    unsigned int User_ID = 0;
+    unsigned char incomingNub;
+    unsigned int  matchUserID = 0;
+    unsigned char rtf = Finger.Search();
+    switch (rtf){
+      case TRUE:
+      FingerID = int(l_ucFPID);
+      break;
+      case FALSE:
+      FingerID = -1;
+      //digitalWrite(4, HIGH);
+      break;
+      case ACK_TIMEOUT:
+      FingerID = 0;
+      break;
+    }
+    delay(50);
+    DisplayFingerprintID();							
+    //ChecktoAddID();
+    check();
+    ChecktoDeleteID();
     
 }
 void displaytext(String text, int x , int y){
@@ -219,7 +222,7 @@ void check(){
     Serial.println(add_id);
     id = add_id.toInt();
     getFingerprintEnroll();
-    digitalWrite(19, HIGH);
+    
   }
   http.end();  //Close connection
 
@@ -228,31 +231,6 @@ void check(){
 
 
 ///////////////////////
-void ChecktoAddID(){
-  WiFiClient client;
-  HTTPClient http;    //Declare object of class HTTPClient
-  //Post Data
-  postData = "Get_Fingerid=get_id"; // Add the Fingerprint ID to the Post array in order to send it
-  // Post methode
-
-  http.begin(client,links);  //initiate HTTP request, put your Website URL or Your Computer IP 
-  http.addHeader("Content-Type", "application/x-www-form-urlencoded");    //Specify content-type header
-  
-  int httpCode = http.POST(postData);   //Send the request
-  String payload = http.getString();    //Get the response payload
-  if(httpCode == 200){
-    Serial.println("request sent");
-  }
-  if (payload.substring(0, 6) == "add-id") {
-    String add_id = payload.substring(6);
-    Serial.println(add_id);
-    id = add_id.toInt();
-    //getFingerprintEnroll(id);
-    digitalWrite(19, HIGH);
-  }
-  http.end();  //Close connection
-  digitalWrite(19, HIGH);
-}
 //******************Enroll a Finpgerprint ID*****************
 
 unsigned char getFingerprintEnroll() {
@@ -325,6 +303,7 @@ void DisplayFingerprintID(){
     delay(500);
     displaytext("Success, your User ID is: " + String(l_ucFPID),15, 5);
     delay(500);
+    digitalWrite(19,HIGH);
     SendFingerprintID( FingerID );
   }
   else if (FingerID == 0){
