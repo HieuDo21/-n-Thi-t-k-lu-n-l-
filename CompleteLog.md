@@ -33,3 +33,6 @@
        - **Problem** The execution flow of the program below the mcu must change to handle the above problem => try use timer or some thing like that.
  - **Hardware problem**
    - the fingerprint only be identified in the direction in which it is enroll. => that was a big problem or not ?
+# 2 final weeks (30/10/2023 - 13/11/2023)
+ # Result
+ - **Link demo video :....**
